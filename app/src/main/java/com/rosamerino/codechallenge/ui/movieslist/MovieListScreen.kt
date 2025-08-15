@@ -53,7 +53,9 @@ fun MovieListScreen(
                         item {
                             Box(modifier = Modifier.fillParentMaxSize()) {
                                 CircularProgressIndicator(
-                                    modifier = Modifier.align(Alignment.Center),
+                                    modifier = Modifier
+                                        .align(Alignment.Center)
+                                        .testTag("LoadingIndicator"),
                                     color = MaterialTheme.colorScheme.primary,
                                 )
                             }
@@ -67,10 +69,10 @@ fun MovieListScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center,
                             ) {
-                                Text("Fehler beim Laden der Filmliste: ${errorState.error.localizedMessage}")
+                                Text("Error loading movie list: ${errorState.error.localizedMessage}")
                                 Spacer(Modifier.height(8.dp))
                                 Button(onClick = { retry() }) {
-                                    Text("Erneut versuchen")
+                                    Text("Retry")
                                 }
                             }
                         }
@@ -93,10 +95,10 @@ fun MovieListScreen(
                                 horizontalAlignment = Alignment.CenterHorizontally,
                                 verticalArrangement = Arrangement.Center,
                             ) {
-                                Text("Fehler beim Laden weiterer Filme: ${errorState.error.localizedMessage}")
+                                Text("Error loading more movies: ${errorState.error.localizedMessage}")
                                 Spacer(Modifier.height(8.dp))
                                 Button(onClick = { retry() }) {
-                                    Text("Erneut versuchen")
+                                    Text("Retry")
                                 }
                             }
                         }
@@ -105,9 +107,9 @@ fun MovieListScreen(
                         item {
                             Box(modifier = Modifier.fillParentMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
                                 if (searchQuery.isNotEmpty()) {
-                                    Text("Keine Filme für '$searchQuery' gefunden.")
+                                    Text("No movies found for '$searchQuery'.")
                                 } else {
-                                    Text("Keine Filme verfügbar. Versuchen Sie eine Suche!")
+                                    Text("No movies available. Try a search!")
                                 }
                             }
                         }
@@ -122,8 +124,9 @@ fun MovieListScreen(
 fun MovieListItem(
     movie: Movie,
     onMovieClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
-    Column {
+    Column(modifier = modifier) {
         Spacer(modifier = Modifier.height(8.dp))
         HorizontalDivider(Modifier.padding(bottom = 4.dp), color = MaterialTheme.colorScheme.primary)
         Row(
@@ -139,7 +142,9 @@ fun MovieListItem(
                 text = movie.title,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier.padding(start = 12.dp),
+                modifier = Modifier
+                    .padding(start = 12.dp)
+                    .testTag("MovieListItemTitle_${movie.id}"),
             )
         }
     }
