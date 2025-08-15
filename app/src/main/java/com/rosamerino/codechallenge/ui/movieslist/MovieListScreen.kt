@@ -8,6 +8,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
@@ -51,7 +52,10 @@ fun MovieListScreen(
                     loadState.refresh is LoadState.Loading -> {
                         item {
                             Box(modifier = Modifier.fillParentMaxSize()) {
-                                CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
+                                CircularProgressIndicator(
+                                    modifier = Modifier.align(Alignment.Center),
+                                    color = MaterialTheme.colorScheme.primary,
+                                )
                             }
                         }
                     }
@@ -127,7 +131,8 @@ fun MovieListItem(
                 Modifier
                     .fillMaxWidth()
                     .clickable { onMovieClick(movie.id) }
-                    .padding(vertical = 8.dp, horizontal = 4.dp),
+                    .padding(vertical = 8.dp, horizontal = 4.dp)
+                    .testTag("MovieListItemRow_${movie.id}"),
             verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
