@@ -11,6 +11,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.SubcomposeAsyncImage
@@ -37,6 +38,7 @@ fun MovieDetailScreen(movieDetail: MovieDetail) {
                     modifier =
                         Modifier
                             .fillMaxWidth()
+                            .semantics(mergeDescendants = true, properties = {})
                             .height(350.dp)
                             .clip(RoundedCornerShape(20.dp)),
                     contentAlignment = Alignment.Center,
@@ -80,39 +82,34 @@ fun MovieDetailScreen(movieDetail: MovieDetail) {
                 color = MaterialTheme.colorScheme.primary,
             )
             Spacer(modifier = Modifier.height(12.dp))
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-            ) {
+
+            Text(
+                text = "Release: ${movieDetail.releaseDate}",
+                style = MaterialTheme.typography.bodyMedium,
+            )
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            if (movieDetail.runtime != null) {
                 Text(
-                    text = "Release: ",
-                    style = MaterialTheme.typography.bodyMedium,
-                )
-                Text(
-                    text = movieDetail.releaseDate,
+                    text = "Duration:  ${movieDetail.runtime} min",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onBackground,
                 )
-                Spacer(modifier = Modifier.width(16.dp))
-
-                movieDetail.runtime?.let {
-                    Text(
-                        text = "\u2022  $it min",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground,
-                    )
-                }
+                Spacer(modifier = Modifier.height(8.dp))
             }
-            Spacer(modifier = Modifier.height(8.dp))
+
             Text(
                 text = "Genres: ${movieDetail.genres.joinToString()}",
                 style = MaterialTheme.typography.bodyMedium,
             )
             Spacer(modifier = Modifier.height(8.dp))
+
             Text(
                 text = "Status: ${movieDetail.status}",
                 style = MaterialTheme.typography.bodyMedium,
             )
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(8.dp))
 
             if (movieDetail.overview.isNotEmpty()) {
                 Card(

@@ -53,10 +53,11 @@ fun MovieListScreen(
                         item {
                             Box(modifier = Modifier.fillParentMaxSize()) {
                                 CircularProgressIndicator(
-                                    modifier = Modifier
-                                        .align(Alignment.Center)
-                                        .testTag("LoadingIndicator"),
-                                    color = MaterialTheme.colorScheme.primary,
+                                    modifier =
+                                        Modifier
+                                            .align(Alignment.Center)
+                                            .testTag("LoadingIndicator"),
+                                    color = MaterialTheme.colorScheme.secondary,
                                 )
                             }
                         }
@@ -124,7 +125,7 @@ fun MovieListScreen(
 fun MovieListItem(
     movie: Movie,
     onMovieClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
 ) {
     Column(modifier = modifier) {
         Spacer(modifier = Modifier.height(8.dp))
@@ -142,9 +143,10 @@ fun MovieListItem(
                 text = movie.title,
                 style = MaterialTheme.typography.bodyLarge,
                 color = MaterialTheme.colorScheme.onBackground,
-                modifier = Modifier
-                    .padding(start = 12.dp)
-                    .testTag("MovieListItemTitle_${movie.id}"),
+                modifier =
+                    Modifier
+                        .padding(start = 12.dp)
+                        .testTag("MovieListItemTitle_${movie.id}"),
             )
         }
     }
