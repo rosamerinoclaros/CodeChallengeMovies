@@ -119,7 +119,7 @@ class MovieListScreenTest {
         }
 
         composeTestRule.waitForIdle()
-        composeTestRule.onNodeWithText("Keine Filme für '${searchQuery.value}' gefunden.", useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onNodeWithText("No movies found for '${searchQuery.value}'.", useUnmergedTree = true).assertIsDisplayed()
     }
 
     @Test
@@ -139,6 +139,6 @@ class MovieListScreenTest {
             }
         }
         composeTestRule.waitForIdle()
-        composeTestRule.onNodeWithText("Keine Filme verfügbar. Versuchen Sie eine Suche!", useUnmergedTree = true).assertIsDisplayed()
+        composeTestRule.onNodeWithText("No movies available. Try a search!", useUnmergedTree = true).assertIsDisplayed()
     }
 }
