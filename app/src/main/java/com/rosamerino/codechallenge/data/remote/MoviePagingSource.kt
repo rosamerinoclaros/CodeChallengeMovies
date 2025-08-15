@@ -1,6 +1,5 @@
 package com.rosamerino.codechallenge.data.remote
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.rosamerino.codechallenge.data.model.Movie
@@ -25,17 +24,12 @@ class MoviePagingSource(
             val nextKey = if (page < totalPages) page + 1 else null
             val prevKey = if (page == 1) null else page - 1
 
-            if (nextKey == null) {
-                Log.d("MoviePagingSource", "End of list at page: $page)")
-            }
-
             LoadResult.Page(
                 data = movies,
                 prevKey = prevKey,
                 nextKey = nextKey,
             )
         } catch (e: Throwable) {
-            Log.e("MoviePagingSource", "Error loading page $page: ${e.message}", e)
             LoadResult.Error(e)
         }
     }

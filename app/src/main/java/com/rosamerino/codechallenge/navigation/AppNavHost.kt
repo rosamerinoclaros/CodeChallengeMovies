@@ -36,8 +36,10 @@ fun AppNavHost(
             )
         }
         composable("movieDetail/{movieId}") { backStackEntry ->
-            val movieId = backStackEntry.arguments?.
-            getString("movieId")?.toIntOrNull() ?: return@composable
+            val movieId =
+                backStackEntry.arguments
+                    ?.getString("movieId")
+                    ?.toIntOrNull() ?: return@composable
 
             LaunchedEffect(movieId) { loadMovieDetail(movieId) }
             movieDetail?.let { MovieDetailScreen(it) }

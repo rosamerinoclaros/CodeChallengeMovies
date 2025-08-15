@@ -88,4 +88,3 @@ data class SpokenLanguageApiModel(
     @SerialName("name")
     val name: String,
 )
-

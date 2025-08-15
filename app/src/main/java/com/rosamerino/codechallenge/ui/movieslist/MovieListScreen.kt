@@ -22,7 +22,9 @@ fun MovieListScreen(
 ) {
     val paddingTop = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
-    Column(modifier = Modifier
+    Column(
+        modifier =
+            Modifier
                 .fillMaxSize()
                 .padding(top = paddingTop)
                 .background(color = MaterialTheme.colorScheme.background),

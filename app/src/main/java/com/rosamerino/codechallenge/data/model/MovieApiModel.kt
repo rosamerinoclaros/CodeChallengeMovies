@@ -34,4 +34,3 @@ data class MovieApiModel(
     @SerialName("vote_count")
     val voteCount: Int,
 )
-
